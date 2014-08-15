@@ -131,7 +131,13 @@
     <None Include="..\..\README.md">
       <Link>README.md</Link>
     </None>
+    <None Include="config\newrelic.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="config\newrelic.template.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="config\plugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="config\plugin.template.json">

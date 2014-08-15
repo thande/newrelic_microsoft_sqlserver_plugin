@@ -114,6 +114,7 @@ namespace NewRelic.Microsoft.SqlServer.Plugin.Configuration
                 webProxy.UseDefaultCredentials = true;
                 webProxy.Credentials = CredentialCache.DefaultCredentials;
                 _ProxyDetails = string.Format("Proxy Server: {0}:{1} with default credentials", proxyElement.Host, port);
+                _log.Debug("Proxy Configuration", _ProxyDetails);
             }
             else if (!string.IsNullOrEmpty(proxyElement.User))
             {
@@ -132,7 +133,7 @@ namespace NewRelic.Microsoft.SqlServer.Plugin.Configuration
             {
                 _ProxyDetails = string.Format("Proxy Server: {0}:{1}", proxyElement.Host, port);
             }
-
+            
             return webProxy;
         }
 
@@ -144,12 +145,15 @@ namespace NewRelic.Microsoft.SqlServer.Plugin.Configuration
             _log.Info(@"  User: {0}\{1}", Environment.UserDomainName, Environment.UserName);
             _log.Info("  Run as Administrator: " + (IsProcessElevated ? "Yes" : "No"));
             _log.Info("  Configuration directory path: {0}", Path.GetFullPath("."));
-
             if (_ProxyDetails != null)
             {
                 _log.Info("  " + _ProxyDetails);
             }
-
+            else
+            {
+                _log.Info("No proxy configured");
+            }
+            
             _log.Info("  Total Endpoints: " + Endpoints.Length);
             _log.Info("  Poll Interval Seconds: " + PollIntervalSeconds);
 
